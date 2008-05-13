@@ -39,7 +39,7 @@ public class Packet {
     // private double pickUpTime;
     public boolean  isReply	= false;
     public DataUI   dataUI;
-    public int      toPort	 = -1;
+    public int      toPort	 = 0;
 
     /** constructors */
     public Packet() {

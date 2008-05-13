@@ -66,7 +66,7 @@ public class Port {
 		packet.gotCorrupted();
 	    else {
 		pktAvailable = true;
-		// System.out.println("node got data..........."+owner.getName()+" "+packet.getData());
+		//System.out.println("node got data..........."+owner.getName()+" "+packet.getData());
 		// System.out.println("port of"+this.owner.getName());
 	    }
 	}
@@ -91,10 +91,10 @@ public class Port {
     }
 
     /**
-         * Returns the packet without destroying it. This is required by WireUI to draw data packets in GUI.
-         * 
-         * @return
-         */
+     * Returns the packet without destroying it. This is required by WireUI to draw data packets in GUI.
+     * 
+     * @return
+     */
     public Packet getPacketCopy() {
 	return packet;
     }

@@ -56,9 +56,9 @@ public class SnWwAUI extends ModuleUI implements ActionListener {
 	DataUI dui = super.getNewDataUI(p);
 	String lbl = p.getFromId() + "->" + p.getToId();
 	if (p.isReply) {
-	    lbl = lbl + " ACKNo:" + mod.ackno;
+	    lbl = lbl + " ACKNo:" + mod.rcv_ackno;
 	} else {
-	    lbl = lbl + " FNo:" + mod.frameno;
+	    lbl = lbl + " FNo:" + mod.snd_frameno;
 	}
 	dui.setDisplayString(lbl);
 	return dui;
@@ -87,7 +87,7 @@ public class SnWwAUI extends ModuleUI implements ActionListener {
 
 	    txtTargetSlNo = new JTextField();
 	    txtTargetSlNo.setMaximumSize(new Dimension(150, 30));
-	    txtTargetSlNo.setText(String.valueOf(mod.targetSlNo));
+	    txtTargetSlNo.setText(String.valueOf(mod.snd_targetSlNo));
 	    txtTargetSlNo.addActionListener(this);
 	    txtTargetSlNo.setEnabled(false);
 
@@ -162,7 +162,7 @@ public class SnWwAUI extends ModuleUI implements ActionListener {
 	} else if (e.getSource() instanceof JButton) {
 	    JButton jb = (JButton) e.getSource();
 	    if (jb.getName().equals("cmdSetVal"))
-		mod.targetSlNo = Integer.parseInt((txtTargetSlNo.getText()));
+		mod.snd_targetSlNo = Integer.parseInt((txtTargetSlNo.getText()));
 	    else if (jb.getName().equals("cmdSetTimeoutVal"))
 		mod.sendTimer = Integer.parseInt((txtTimeoutVal.getText()));
 	}
