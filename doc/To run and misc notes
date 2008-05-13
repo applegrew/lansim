@@ -1,0 +1,10 @@
+To run the program. Open console and
+cd to bin directory.
+There type
+java -cp .:../lib/liquidlnf.jar ui.main.ApplicationManager
+ 
+---------------------------------
+
+To count the total lines of codes run
+
+find src -type f -iname "*.java" -exec cat '{}' \;|wc -l

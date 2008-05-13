@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<project default="javadoc">
+  <target name="javadoc">
+    <javadoc destdir="doc/javadoc" access="protected" source="1.5" use="true" notree="false" nonavbar="false" noindex="false" splitindex="true" author="true" version="true" nodeprecatedlist="false" nodeprecated="false" packagenames="fio,module.Node,module,module.SnWwA,ui,module.Hub,buffer,util,module.Pc,module.Router,framework,ui.main" sourcepath="src" classpath="lib/napkinlaf.jar:lib/napkinlaf-swingset2.jar:lib/liquidlnf.jar" doctitle="LANSim - User javadoc">
+      <link href="file:/media/sda1/Documents and Settings/Nirupam/My Documents/workspace/LANSim/doc/javadoc/"/>
+    </javadoc>
+  </target>
+</project>

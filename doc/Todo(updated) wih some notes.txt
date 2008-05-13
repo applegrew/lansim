@@ -1,0 +1,145 @@
+TODO for this sem
+------------------
+1) Use JUnit.
+2) Slow the data-flow animation a bit and decrease latencies of modules so that they generate a lot of packets.
+3) Display a sim report at the end of simulation.
+4) Fast-slow simulation slider.
+
+
+Todo For Future
+----------------
+1)Add loopback port to each module
+
+1.5) Display port no.s
+
+2)Serial no.s are ok for framework's internal use but modules should be made to use MAC address to refer each other
+and not serial no.s. The framework may keep a dictonary to map MAC add.s to serial no.s.
+
+3)make command window actually take input and execute commands
+
+4)Add ObjectBroker - This will keep a list of all available objects in the program. It will also
+let 'clients' (one who is asking for the reference to the object) to provide some properties of objects to help
+in searching and locating the particular object.
+
+5)Add new wire - directional wireless
+
+6)Add new module - WiFi hopspot that also draws a circle showing its radius of coverage
+
+7)Add new module - WiFi receiver that gets reference to WiFI hotspot via ObjectBroker.
+
+8)Add probability of data corruption property to wire.
+
+9)Make "probability of data corruption" and Latency of wire configurable by gui.
+
+10)Make wire bi-directional.
+
+11)Buffer data packets in ports of modules. This buffer size could be set by modules. Let the modules fetch
+only one packet at every time step. I am interpreting one time step as the smallest disceret time sampled from
+the continuous time, not merely a time for single step. A step of module could span to multiple time steps.
+
+If more packet has arrived when buffer is already full then simply forget the newly arrived packet and turn on a flag signalling that some packets have been lost. I think we had decided against buffering packets in ports because this a virtual concept so buffering must be implmented by modules themselves. But in that implementation a module can very well empty out its buffer in one time step, maybe not knowingly because why would it cheat, but due to a bug, and a simulator is suppoed to
+help detect those bugs. In this new implementation we can atleast force it to get one packet per time step.
+OR
+We could leave the port to have only one packet and let the module do the buffering. But make the Clock inform ManagerUI that
+last tick was too long, this is not much informative and inaccurate.
+
+12)Will our simulator allow checking of Differential Manchester, etc. methods? Probably no because we are providing the
+physical layer and all such decodings are done at this layer. See point 15 also.
+
+13)Allow users to randomly shutdown or crash or reboot modules. A crash can probably be simulated by deleting the whole 
+module, moduleUI and moduleWindow; then recreating them. The only thing that will be preserved and restored is moduleui's
+position on screen and how many and which wires it is connected to. Modules would be let to handle shutdown and reboot
+themselves.
+
+14)Add a new getCommandPage() method to ModuleUI, just like getPropertyPage(), but unlike getPropertyPage() if getCommandPage()
+returns null then JTextArea is added which will allow console like interaction.
+
+15)Later some time in future, implement wire types as in real world where say a coaxial ethernet cable will have a
+method void putData(double voltage, int pin_no) and double getData(int pin_no); you get the idea. These methods will
+only be callable in a (say) REAL_SIMULATION_MODE. This will allow modules to implement physical layers too and will
+be able to do which point 12 describes. In this mode no data-flow animation would be done.
+
+16)Data Frames are created by Data-Link layer from bit-streams provided by Physical Layer, but in our case we are providing
+only physical layer, not data-link layer so, it is like physical layer is creating the frames. This is unrealistic, but
+I nowhere read that the frames are created according to some protocaols, but only this that frames could be of variable
+lenght. Anyway, so, transmitting-end data-link layer does all the processing on the frame then it breaks it down into
+bit-streams before sending it to physical layer. At receiving end using the bit-stream from physical layer that same frame is
+recreated by the data-link layer. So, this frame creation and destroying happens in-between these two layers. So, in our case
+we are providing with all realistic situations except the part where physical layer is making the frame. This doesn't
+change the realism adversely and hence it is ok. Furthermore, it allows us to provide the cool data-flow or rather
+frame-flow animation. :-)
+
+17)Phy layer must provide CSMA/CD too. While our phy layer is providing CD but still we are not providing CSMA.
+
+21)Add a getPropertyPage() like method - getTabs(), in ModuleUI. This will allow modules to provide unlimited no. of
+custom tabs.
+
+22)Use TextAreaReader class to implement command window as a console. Make the background black and font white. Add
+two convinience methods in moduleWindow - void print(String) and String getline(). They will write to and read from
+the command tab. getline() will not be blocking but will return immediately w/o waiting for the user to input. All
+whole scentences entered by user will be stored in a ArrayList<String> buffer. It will be removed (poped) one-by-one per
+call of getline().
+
+23)Create a new class Container (implements Components). It will 'contain' the modules. We can implement Containers as LAN,
+Internet, WAN, etc. Any new module will be part of a 'default' Container. ManagerUI will not call render() of moduleui
+directly, but, instead it will call the render() of the Containers. Containers will then call the respective children
+moduleUIs, after that it may (say) draw a rectangle to show show (say) the boundary of 'LAN'. OR If the LAN is collapsed
+into cloud then it way just draw a cloud instead and not call the render function of any moduleUIs. MangerUI can still
+call step() of moduleUIs directly. Also note any click, etc. events must call Containers' ModuleUI whoIsClicked(Point pt)
+event. It will return the clicked ModuleUI reference or null, or if the Container is in collapsed form (or even in expanded
+form) and it was the one to be clicked then its isClicked() will true, i.e. ManagerUI will have to call the Container's
+isClicked() first and if it is true then it will call its whoIsClicked().
+-->Another additional idea: Container can also have another mode where it collapses into a line, where all the LAN modules
+are shown arranged on both sides of the wire. To implement this the Container can draw a line, long enough to accomodate
+all the modules (when distributed on both sides), then it can temporarily set the coords of modules to pos. them to the
+required loc. then call their render() and then revert their coords. It can do this coord reverting one time after it
+has been expanded.
+
+24)Change data type of Data variable of Packet to char[] from String. This is more natuaral since the data are stored
+as bits. Unfortunately we can't use boolean, which is actually even more natural since we need an array of bits, since
+in Java boolean can have only true or false not 1 or 0.
+
+25)In pause mode when any data packet is clicked then popup a new window that will show the content of the data. (So,
+we need to add a isClicked() method in DataUI too.) When ManagerUI is dbl-clicked in Paused_Mode then ManagerUI can
+get list of all DataUI from the ObjectBroker and call their isClicked(). When found one then it will create a DataViewer
+window and give it a reference of the DataUI and it will then also give the reference of DataViwer to the DataUI, so
+that when DataUI is signalled that it is no longer required (by (say) calling a method kill() in it) then it may
+signal the DataViewer to hide itself. The DataViewer will have a tab where the raw 'bits' will be shown and there will
+be another tab where the raw data could be decoded. The decoding data type will be asked from the user using a combo
+box. If the given data is not possible to be decoded using the specified datatype (since no. of bytes in the datatype and
+the data mismatch) then the user should be told using an error message. OR, better add an int field in the Packet to signal
+the data type. This will of course be set by module, and on seeing this particular no. DataViwer will decode it, but this
+requires that DataViwer should already know what kinds of packets will be generated by modules, which is not possible.
+Hence it is best that DataViewer 'ask' for the decode value - a simple String, which will be displayed by DataViewer on
+a JLable. The good thing is that this String can also be <html></html> coded and hence module (or moduleUI depends which
+is easily accessible - favour moduleUI) can have FULL control over the formatting of the decoded data view.
+ADDITIONAL NOTE: Since a particular Packet can encapsulate other packest, e.g. IP can encapsulate ICMP packets (?), hence,
+maybe it would be best if we create new package - packets, at the same level as modules package. This will hold
+sub-folders of packet types with files with extended classes of Packet and DataUI. These classes would be designed
+specifically for a particular data type, e.g. IP. Say IP can override Data to be of type IPPayload (class). All data
+types that can be payloads of IP can then extend IPPayload. This will enforce compile-time checking that wrong payloads
+are not sent. The IPDataUI can override DataUI's String getDecodeVal() (which in DataUI will simply return null) to
+decode its data and also call its payload's getDecodeVal() to get its decoded value. Note, this requires that DataUIs also
+have a String getRawVal() method when called will simply return the value of Data in case of DataUI, but in case of IPDataUI
+it will call the getRawVal() of its payload first and to that it will append its own raw data. Note, this again requires
+that IP's extend Packet class should also have char data[] variable alongwith the IPPayload Data variable.
+
+26)Add a generic class in util package which extends JPanel. Its purpose would be to allow moduleUIs to display animations
+in the moduleWindow. Hence, it must have all the code to generate the requested no. of FPS. This can be (say) used by router's
+moduleUI to display the Spanning Routing Tree of the router graphically.
+
+27)Add some methods in ManagerUI, moduleWindow, etc., which when called save their respective current graphics context's image
+to the harddisk. So, that this can be used to create a video of the animation.
+
+28)Add options in all module's properties that will allow user to choose which packets would be rendered. The ones not to
+be rendered will have their dataUI set to null. Hence WireUI must first check that dataUI in a Packet instance is not null
+before calling the dataUI's render().
+
+==============================================================
+-----------------------Suggested by SIR----------------------
+->18)Display Router queue.
+
+->19)Add a module (say) Ethernet LAN. When added to client space will ask in a pop-up about the no. of PCs required. It
+will then create that (Ethernet) LAN with that given no. of PCs. SEE (23) ALSO.
+
+->20)Create a JTree view of all components. Here all nodes in one LAN (say) EthLAN-Lab will shown as childs as of EthLAN-Lab.
