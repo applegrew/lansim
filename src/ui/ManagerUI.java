@@ -1036,6 +1036,8 @@ public class ManagerUI extends JPanel implements Runnable {
 	for (int i = 0; i < wiresUI.size(); i++)
 	    wiresUI.get(i).updatePrivateData();
 	manager.initSimulation();
+	for (int i = 0; i < modulesUI.size(); i++)
+	    modulesUI.get(i).reset();
 	if (!renderAllways) {
 	    t = new Thread(this, name);
 	    t.start();

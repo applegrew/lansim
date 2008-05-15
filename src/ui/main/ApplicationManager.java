@@ -108,7 +108,7 @@ public class ApplicationManager extends MouseAdapter implements ActionListener, 
 		String className = MiscFunctions.convertPath2className(componentPathName);
 		mainWin.cmdComponents[i] = (JButton) Class.forName(className).newInstance();
 	    } catch (Exception e) {
-		System.out.print(e.getClass()+": "+e.getMessage() + ": ");
+		System.out.print(e.getMessage() + ": ");
 		System.out.println(mainWin.ComponentsName[i] + " Button not found using deafult one.");
 		mainWin.cmdComponents[i] = null;
 	    }
