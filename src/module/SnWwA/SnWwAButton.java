@@ -23,6 +23,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import ui.main.Config;
+
 /**
  * 
  * @author Nirupam
@@ -36,7 +38,7 @@ public class SnWwAButton extends javax.swing.JButton {
 	//buffer.Startup.button = this;
 	setToolTipText("SW Node");
 	//this.setText("SW Node");
-	this.setIcon(new ImageIcon(new ImageIcon("module/SnWwA/terminal.jpg").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+	this.setIcon(new ImageIcon(new ImageIcon(Config.moduleDirPath + "/SnWwA/terminal.jpg").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 	this.setSize(new Dimension(40, 40));
 	this.setPreferredSize(new Dimension(40, 40));
     }

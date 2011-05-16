@@ -23,6 +23,8 @@ import java.awt.Container;
 import java.lang.String;
 import java.util.ArrayList;
 
+import ui.main.Config;
+
 import framework.Packet;
 import framework.Port;
 import module.ModuleUI;
@@ -251,7 +253,7 @@ public class SnWwAMod implements module.Module {
     }
 
     public String getIconPath() {
-	return "module/SnWwA/terminal.jpg";
+	return Config.moduleDirPath + "/SnWwA/terminal.jpg";
     }
 
 }

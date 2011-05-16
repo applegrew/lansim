@@ -26,7 +26,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  * 
  */
 public final class Config {
-    final static public String iconPath = "../icons/";
+	final static public String moduleDirPath = Config.class.getResource("/module").getPath();
+    final static public String iconPath = moduleDirPath + "/../../icons/";
 
     final static public void setLookNFeel() {
 	try {

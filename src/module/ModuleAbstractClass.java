@@ -18,6 +18,7 @@
  */
 package module;
 
+import ui.main.Config;
 import framework.Port;
 
 /**
@@ -33,7 +34,7 @@ public class ModuleAbstractClass implements Module {
     }
 
     public String getIconPath() {
-	return "module/" + getName() + "/icon.gif";
+	return  Config.moduleDirPath + "/" + getName() + "/icon.gif";
     }
 
     public ModuleUI getModuleUI() {

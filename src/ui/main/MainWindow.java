@@ -527,7 +527,7 @@ class MainWindow {
 	    JButton newButton = new JButton();
 	    // newButton.setText(ComponentsName[i]);
 	    newButton.setToolTipText(ComponentsName[i]);
-	    Image icon = new ImageIcon("module/" + ComponentsName[i] + "/icon.gif").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+	    Image icon = new ImageIcon(Config.moduleDirPath + "/" + ComponentsName[i] + "/icon.gif").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 	    newButton.setIcon(new ImageIcon(icon));
 	    newButton.setSize(new Dimension(40, 40));
 	    newButton.setPreferredSize(new Dimension(40, 40));
