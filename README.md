@@ -8,9 +8,9 @@ Introduction
 
 LANSim is a CNet-like network simulator. It aims to be very easy to use GUI based network simulator. We started this (and is still is) our college semester project.
 
-This is meant to be user friendly as well as feature rich. This field lacks software with good user interface except for the very popular CNet (which is still not available for Windows platform). The commercial softwares in this field are too complicated. This aimed to go along Multisim(R) and Blender(R) way. As user-friendly as Multisim and as functional as [Blender].
+This is meant to be user friendly as well as feature rich. This field lacks software with good user interface except for the very popular CNet (which is still not available for Windows platform). The commercial softwares in this field are too complicated. This aimed to go along Multisim(R) and Blender(R) way. As user-friendly as Multisim and as functional as [Blender][bl].
 
-[Blender]: http://www.blender.org/
+[bl]: http://www.blender.org/
 
 More Details and Documentation
 ------------------------------
