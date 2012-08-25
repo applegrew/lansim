@@ -12,7 +12,34 @@ This is meant to be user friendly as well as feature rich. This field lacks soft
 
 [bl]: http://www.blender.org/
 
+Compiling the code
+------------------
+
+The following is for Unix/Linux or Mac OSX platforms.
+
+1. `cd` to `lansim` folder.
+1. Then run the following:-
+
+        find src/ -iname "*.java"| xargs  javac -cp lib/liquidlnf.jar:lib/napkinlaf-swingset2.jar:lib/napkinlaf.jar -d bin
+
+**- Or -**
+
+You can [Import this project](http://help.eclipse.org/helios/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm) into [Eclipse](http://www.eclipse.org/downloads/), and build from there. This is applicable for Windows too.
+
+Running this project
+--------------------
+
+**Notice for Windows people:** There are **no EXE** files. This is a Java project and all it needs is that [JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html) is installed.
+
+1. Open console ([command prompt](http://en.wikipedia.org/wiki/Command_Prompt) for Windows).
+1. `cd` to `bin` directory.
+1. There type:-
+
+        java -cp .:../lib/liquidlnf.jar ui.main.ApplicationManager
+
+    If you are on Windows then replace `:` by `;`.
+
 More Details and Documentation
 ------------------------------
 
-Goto to project's homepage - http://lansim.sourceforge.net/
+Goto to project's homepage - [http://lansim.sourceforge.net/](http://lansim.sourceforge.net/). Also do checkout `LANSim.doc` and `LANSim.ppt` in `doc` folder.

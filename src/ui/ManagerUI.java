@@ -39,7 +39,6 @@ import framework.Clock;
 import framework.Manager;
 import framework.Wire;
 import framework.Port;
-import fio.Loader;
 
 import java.awt.event.MouseEvent;
 import java.awt.Color;
