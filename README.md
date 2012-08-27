@@ -15,6 +15,15 @@ This is meant to be user friendly as well as feature rich. This field lacks soft
 Compiling the code
 ------------------
 
+1. `cd` to `lansim` folder.
+1. Run the following:-
+
+        ant
+
+**- Or -**
+
+**This method is not recommended as it won't copy the resource files like icon images etc.**
+
 The following is for Unix/Linux or Mac OSX platforms.
 
 1. `cd` to `lansim` folder.
